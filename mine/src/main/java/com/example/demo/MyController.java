@@ -1,9 +1,14 @@
 package com.example.demo;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MyController {
@@ -13,8 +18,15 @@ public class MyController {
 	@GetMapping("/todoList")
 	public String GetTodoList(Model model) {
 
-		model.addAttribute("todos", service.getTodoList());
+		model.addAttribute("todos", service.getAllTodoList());
 
+		return "todoList";
+	}
+	
+	@PostMapping("/deadLine")
+	public String searchPerson(@RequestParam("date") LocalDate date, Model model) {
+		Optional<Todo> todo = service.getTodoBylocalDate(date);
+		model.addAttribute("deadLine", todo);
 		return "todoList";
 	}
 
