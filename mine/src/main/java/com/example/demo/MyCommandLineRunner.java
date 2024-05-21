@@ -17,7 +17,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Todo todo1 = new Todo(1, "個人演習を終わらせる", LocalDate.parse("2023-05-21"),LocalTime.parse("14:30:15"), false);
+		Todo todo1 = new Todo(1, "個人演習を終わらせる", LocalDate.parse("2024-05-22"),LocalTime.parse("19:00:00"), false);
 		
 		todoRepository.save(todo1);
 		
