@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -23,10 +22,10 @@ public class MyController {
 		return "todoList";
 	}
 	
-	@PostMapping("/deadLine")
+	@GetMapping("/deadLine")
 	public String searchPerson(@RequestParam("date") LocalDate date, Model model) {
 		Optional<Todo> todo = service.getTodoBylocalDate(date);
-		model.addAttribute("deadLine", todo);
+		model.addAttribute("todos", todo);
 		return "todoList";
 	}
 

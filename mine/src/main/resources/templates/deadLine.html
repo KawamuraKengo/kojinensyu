@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TodoList</title>
+</head>
+<body>
+	
+<form th:action="@{/deadLine}" method="Get">
+	<input type="text" class="form-control" placeholder="Search by deadLineDate" name="date">
+	<button type="submit">
+		<i class="fas fa-search"></i> Search
+	</button>
+	<button  type="button" onclick="window.location.href='/'">
+		<i class="fas fa-sync-alt"></i> Reset
+	</button>
+</form>
+	
+	<table>
+	       <thead>
+	           <tr>
+	               <th>タスク</th>
+	               <th>期限日</th>
+	               <th>期限時間</th>
+	           </tr>
+	       </thead>
+	       <tbody>
+	           <tr th:each="todo : ${deadLine}">
+	               <td th:text="${todo.task}">Task</td>
+	               <td th:text="${todo.deadLineDate}">DeadLineDate</td>
+	               <td th:text="${todo.deadLineTime}">DeadLineTime</td>
+	           </tr>
+	       </tbody>
+	   </table>
+
+</body>
+</html>
