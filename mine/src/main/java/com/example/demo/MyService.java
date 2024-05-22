@@ -2,7 +2,6 @@ package com.example.demo;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +25,12 @@ public class MyService {
 		todoRepository.deleteById(id);
 	}
 
-	public Optional<Todo> getTodoBylocalDate(LocalDate date) {
-		Optional<Todo> todo = todoRepository.findByDeadLineDateLessThan(date);
-		return Optional.of(todo.orElse(null));
+//	public Optional<Todo> getTodoBylocalDate(LocalDate date) {
+//		Optional<Todo> todo = todoRepository.findByDeadLineDateLessThan(date);
+//		return Optional.of(todo.orElse(null));
+//	}
+	public List<Todo> getTodoBylocalDate(LocalDate date) {
+	    return todoRepository.findByDeadLineDateLessThan(date);
 	}
 
 }

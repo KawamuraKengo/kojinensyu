@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class MyController {
 	
 	@GetMapping("/deadLine")
 	public String searchPerson(@RequestParam("date") LocalDate date, Model model) {
-		Optional<Todo> todo = service.getTodoBylocalDate(date);
+		List<Todo> todo = service.getTodoBylocalDate(date);
 		model.addAttribute("todos", todo);
 		return "todoList";
 	}
