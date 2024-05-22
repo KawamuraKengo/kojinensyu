@@ -16,14 +16,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MyController {
 	@Autowired
 	MyService service;
-
-	@GetMapping("/todoList")
-	public String GetTodoList(Model model) {
-
-		model.addAttribute("todos", service.getAllTodoList());
-
-		return "todoList";
-	}
+	
+	 @GetMapping("/todoList")
+	    public String getTodoList(Model model, @RequestParam(value = "sort", required = false) String sort) {
+	        List<Todo> todos;
+	        if (sort != null) {
+	            switch (sort) {
+	                case "task":
+	                    todos = service.getAllTodosSortedByTask();
+	                    break;
+	                case "deadLineDate":
+	                    todos = service.getAllTodosSortedByDeadLineDate();
+	                    break;
+	                case "deadLineTime":
+	                    todos = service.getAllTodosSortedByDeadLineTime();
+	                    break;
+	                default:
+	                    todos = service.getAllTodoList();
+	                    break;
+	            }
+	        } else {
+	            todos = service.getAllTodoList();
+	        }
+	        model.addAttribute("todos", todos);
+	        return "todoList";
+	    }
 	
 	@GetMapping("/deadLine")
 	public String searchTodo(@RequestParam("date") LocalDate date, Model model) {

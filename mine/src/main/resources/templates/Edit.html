@@ -1,22 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>Edit Todo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-custom {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
-	<h1>Edit Todo</h1>
-	<form method="post" action="/edit">
-	    <input type="hidden" name="id" th:value="${todo.id}" />
-	        <label for="task">Task:</label>
-	        <input type="text"  id="task" name="task" th:value="${todo.task}" required />
-	        <label for="deadLineDate">deadLineDate:</label>
-	        <input type="date" id="deadLineDate" name="deadLineDate" th:value="${todo.deadLineDate}" required />
-	        <label for="deadLineTime">deadLineTime:</label>
-	        <input type="time"  id="deadLineTime" name="deadLineTime" th:value="${todo.deadLineTime}" required />
-	    <button type="submit">Save</button>
-	</form>
+<div class="container">
+    <h1 class="mb-4">編集・追加</h1>
+    <form method="post" action="/edit">
+        <input type="hidden" name="id" th:value="${todo.id}" />
+        
+        <div class="form-group">
+            <label for="task">タスク:</label>
+            <input type="text" class="form-control" id="task" name="task" th:value="${todo.task}" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="deadLineDate">期限日:</label>
+            <input type="date" class="form-control" id="deadLineDate" name="deadLineDate" th:value="${todo.deadLineDate}"  />
+        </div>
+        
+        <div class="form-group">
+            <label for="deadLineTime">期限時間:</label>
+            <input type="time" class="form-control" id="deadLineTime" name="deadLineTime" th:value="${todo.deadLineTime}"  />
+        </div>
+		<div class="form-group">
+			<label for="everyDay">毎日すること？:</label>
+		    <input type="checkbox" id="everyDay" name="everyDay" value="true"><br>
+		</div>
+        <button type="submit" class="btn btn-primary btn-custom">
+            <i class="fas fa-save"></i> 保存
+        </button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

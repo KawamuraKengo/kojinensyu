@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>TodoList</title>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn {
+            margin-right: 5px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .form-inline .form-control {
+            width: auto;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-	
-<form th:action="@{/deadLine}" method="Get">
-	<input type="date" class="form-control" placeholder="Search by deadLine" name="date" required>
-	<button type="submit">
-		<i class="fas fa-search"></i> Search
-	</button>
-	<button  type="button" onclick="window.location.href='/todoList'">
-		<i class="fas fa-sync-alt"></i> Reset
-	</button>
-</form>
-	
-	<table>
-	       <thead>
-	           <tr>
-	               <th>タスク</th>
-	               <th>期限日</th>
-	               <th>期限時間</th>
-	           </tr>
-	       </thead>
-	       <tbody>
-	           <tr th:each="todo : ${todos}">
-	               <td th:text="${todo.task}">Task</td>
-	               <td th:text="${todo.deadLineDate}">DeadLineDate</td>
-	               <td th:text="${todo.deadLineTime}">DeadLineTime</td>
-				   <td>
-                       <a th:href="@{/edit/{id}(id=${todo.id})}" class="btn btn-sm btn-primary">
-                           <i class="fas fa-edit"></i> Edit <!-- 編集ボタン -->
-                       </a>
-                       <a th:href="@{/delete/{id}(id=${todo.id})}" class="btn btn-sm btn-danger">
-                           <i class="fas fa-trash-alt"></i> Delete <!-- 削除ボタン -->
-                       </a>
-                   </td>
-	           </tr>
-	       </tbody>
-	   </table>
-	   
-	   <a th:href="@{/add}" class="btn btn-sm btn-success">
-	      <i class="fas fa-plus"></i> Add Todo <!-- 新しいtodoを追加するボタン -->
-	   </a>
+
+<div class="container">
+    <h1 class="mb-4">Todoリスト</h1>
+    
+    <form class="form-inline mb-4" th:action="@{/deadLine}" method="get">
+        <div class="form-group mr-2">
+            <input type="date" class="form-control" placeholder="Search by deadLine" name="date" required>
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">
+            <i class="fas fa-search"></i> 検索
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/todoList'">
+            <i class="fas fa-sync-alt"></i> 全表示
+        </button>
+    </form>
+    
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <a th:href="@{/todoList(sort='task')}">タスク</a>
+                </th>
+                <th>
+                    <a th:href="@{/todoList(sort='deadLineDate')}">期限日</a>
+                </th>
+                <th>
+                    <a th:href="@{/todoList(sort='deadLineTime')}">期限時間</a>
+                </th>
+                <th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="todo : ${todos}">
+                <td th:text="${todo.task}">Task</td>
+                <td th:text="${todo.deadLineDate != null ? todo.deadLineDate : '期限なし'}">DeadLineDate</td>
+                <td th:text="${todo.deadLineTime != null ? todo.deadLineTime : '期限なし'}">DeadLineTime</td>
+                <td>
+                    <a th:href="@{/edit/{id}(id=${todo.id})}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit"></i> 編集
+                    </a>
+                    <a th:href="@{/delete/{id}(id=${todo.id})}" class="btn btn-sm btn-danger">
+                        <i class="fas fa-trash-alt"></i> 削除
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <a th:href="@{/add}" class="btn btn-sm btn-success">
+        <i class="fas fa-plus"></i> 追加
+    </a>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

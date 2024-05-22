@@ -12,7 +12,7 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
 	List<Todo> findByDeadLineDate(LocalDate date);
 	List<Todo> findByDeadLineTime(LocalTime time);
 	List<Todo> findByTaskContaining(String task);
- 	List<Todo> findByDeadLineDateLessThanEqual(LocalDate date);
+ 	List<Todo> findByDeadLineDateLessThanEqualOrEveryDayIsTrue(LocalDate date);
 	
 }
 
