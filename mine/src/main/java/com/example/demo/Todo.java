@@ -22,5 +22,6 @@ public class Todo {
 	private String task;
 	private LocalDate deadLineDate;
 	private LocalTime deadLineTime;
-	private boolean everyDay;
+	private boolean everyDay=false;
+	private boolean complete=false;
 }

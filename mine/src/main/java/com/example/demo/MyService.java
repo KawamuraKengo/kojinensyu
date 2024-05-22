@@ -42,7 +42,7 @@ public class MyService {
 		Todo todo = todoRepository.findById(id);
 		return todo;
 	}
-
+	
 	@Transactional
 	public void editTodo(Todo todo) {
 		todoRepository.save(todo);
@@ -58,10 +58,6 @@ public class MyService {
 		todoRepository.save(todo);
 	}
 
-	//	public Optional<Todo> getTodoBylocalDate(LocalDate date) {
-	//		Optional<Todo> todo = todoRepository.findByDeadLineDateLessThan(date);
-	//		return Optional.of(todo.orElse(null));
-	//	}
 	public List<Todo> getTodoBylocalDate(LocalDate date) {
 		return todoRepository.findByDeadLineDateLessThanEqualOrEveryDayIsTrue(date);
 	}

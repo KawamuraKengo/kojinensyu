@@ -50,7 +50,7 @@
         </div>
 		<div class="form-group">
 			<label for="everyDay">毎日すること？:</label>
-		    <input type="checkbox" id="everyDay" name="everyDay" value="true"><br>
+		    <input type="checkbox" id="everyDay" name="everyDay" th:checked="${todo.everyDay}"/>
 		</div>
         <button type="submit" class="btn btn-primary btn-custom">
             <i class="fas fa-save"></i> 保存
