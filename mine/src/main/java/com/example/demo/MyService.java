@@ -16,6 +16,11 @@ public class MyService {
 		List<Todo> list = todoRepository.findAll();
 		return list;
 	}
+	
+	public Todo getTodoById(int id) {
+		Todo todo = todoRepository.findById(id);
+		return todo;
+	}
 
 	public void editTodo(Todo todo) {
 		todoRepository.save(todo);
@@ -24,13 +29,17 @@ public class MyService {
 	public void deleteTodo(int id) {
 		todoRepository.deleteById(id);
 	}
+	
+	public void addTodo(Todo todo){
+		todoRepository.save(todo);
+	}
 
 //	public Optional<Todo> getTodoBylocalDate(LocalDate date) {
 //		Optional<Todo> todo = todoRepository.findByDeadLineDateLessThan(date);
 //		return Optional.of(todo.orElse(null));
 //	}
 	public List<Todo> getTodoBylocalDate(LocalDate date) {
-	    return todoRepository.findByDeadLineDateLessThan(date);
+	    return todoRepository.findByDeadLineDateLessThanEqual(date);
 	}
 
 }

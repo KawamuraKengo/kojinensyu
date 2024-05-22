@@ -7,11 +7,11 @@
 <body>
 	
 <form th:action="@{/deadLine}" method="Get">
-	<input type="text" class="form-control" placeholder="Search by deadLineDate" name="date">
+	<input type="date" class="form-control" placeholder="Search by deadLine" name="date" required>
 	<button type="submit">
 		<i class="fas fa-search"></i> Search
 	</button>
-	<button  type="button" onclick="window.location.href='/'">
+	<button  type="button" onclick="window.location.href='/todoList'">
 		<i class="fas fa-sync-alt"></i> Reset
 	</button>
 </form>
@@ -29,14 +29,21 @@
 	               <td th:text="${todo.task}">Task</td>
 	               <td th:text="${todo.deadLineDate}">DeadLineDate</td>
 	               <td th:text="${todo.deadLineTime}">DeadLineTime</td>
-	           </tr>
-	           <tr th:each="todo : ${deadLine}">
-	               <td th:text="${todo.task}">Task</td>
-	               <td th:text="${todo.deadLineDate}">DeadLineDate</td>
-	               <td th:text="${todo.deadLineTime}">DeadLineTime</td>
+				   <td>
+                       <a th:href="@{/edit/{id}(id=${todo.id})}" class="btn btn-sm btn-primary">
+                           <i class="fas fa-edit"></i> Edit <!-- 編集ボタン -->
+                       </a>
+                       <a th:href="@{/delete/{id}(id=${todo.id})}" class="btn btn-sm btn-danger">
+                           <i class="fas fa-trash-alt"></i> Delete <!-- 削除ボタン -->
+                       </a>
+                   </td>
 	           </tr>
 	       </tbody>
 	   </table>
+	   
+	   <a th:href="@{/add}" class="btn btn-sm btn-success">
+	      <i class="fas fa-plus"></i> Add Todo <!-- 新しいtodoを追加するボタン -->
+	   </a>
 
 </body>
 </html>
