@@ -61,6 +61,7 @@ public class MyService {
 	}
 
 	public void addTodo(Todo todo) {
+		if(todo.getTask()!=null)
 		todoRepository.save(todo);
 	}
 

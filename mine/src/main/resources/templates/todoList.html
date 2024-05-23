@@ -7,7 +7,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
+
     <style>
         body {
             padding: 20px;
@@ -26,27 +26,6 @@
             display: inline-block;
         }
     </style>
-	
-<!--	<script>-->
-<!--	    function toggleComplete(checkbox, todoId) {-->
-<!--	        var url = '/toggleComplete/' + todoId;-->
-<!--	        var complete = checkbox.checked;-->
-	
-<!--	        // Ajaxリクエストを使用してcompleteフィールドを更新-->
-<!--	        var xhr = new XMLHttpRequest();-->
-<!--	        xhr.open('POST', url);-->
-<!--	        xhr.setRequestHeader('Content-Type', 'application/json');-->
-<!--	        xhr.onload = function() {-->
-<!--	            if (xhr.status === 200) {-->
-<!--	                console.log('Complete status updated successfully.');-->
-<!--	            } else {-->
-<!--	                console.error('Failed to update complete status.');-->
-<!--	            }-->
-<!--	        };-->
-<!--	        xhr.send(JSON.stringify({ complete: complete }));-->
-<!--	    }-->
-<!--	</script>-->
-
 
 </head>
 <body>
@@ -54,6 +33,7 @@
 <div class="container">
     <h1 class="mb-4">Todoリスト</h1>
     
+<!--	検索-->
     <form class="form-inline mb-4" th:action="@{/deadLine}" method="get">
         <div class="form-group mr-2">
             <input type="date" class="form-control" name="date" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required>
@@ -66,6 +46,7 @@
         </button>
     </form>
     
+<!--	Todoリストテーブル-->
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
             <tr>
@@ -89,7 +70,6 @@
                 <td th:text="${todo.deadLineTime != null ? todo.deadLineTime : '期限なし'}">DeadLineTime</td>
 				<td>
 					<input type="checkbox" th:checked="${todo.complete}" />
-<!--					onchange="toggleComplete(this, '${todo.id}')"-->
 				</td>
                 <td>
                     <a th:href="@{/edit/{id}(id=${todo.id})}" class="btn btn-sm btn-primary">
@@ -103,6 +83,7 @@
         </tbody>
     </table>
     
+<!--	追加ボタン-->
     <a th:href="@{/add}" class="btn btn-sm btn-success">
         <i class="fas fa-plus"></i> 追加
     </a>

@@ -17,6 +17,7 @@ public class MyController {
 	@Autowired
 	MyService service;
 
+//	Todoリスト画面
 	@GetMapping("/todoList")
 	public String getTodoList(Model model, @RequestParam(value = "sort", required = false) String sort) {
 		List<Todo> todos;
@@ -42,6 +43,7 @@ public class MyController {
 		return "todoList";
 	}
 
+//	絞り込み
 	@GetMapping("/deadLine")
 	public String searchTodo(@RequestParam("date") LocalDate date, Model model) {
 		List<Todo> todo = service.getTodoBylocalDate(date);
@@ -49,6 +51,7 @@ public class MyController {
 		return "todoList";
 	}
 
+//	編集画面へ
 	@GetMapping("/edit/{id}")
 	public String showEditForm(@PathVariable("id") int id, Model model) {
 		Todo todo = service.getTodoById(id);
@@ -56,18 +59,21 @@ public class MyController {
 		return "edit";
 	}
 
+//	編集追加画面
 	@PostMapping("/edit")
 	public String editTodo(@ModelAttribute("todo") Todo todo) {
 		service.editTodo(todo);
 		return "redirect:/todoList";
 	}
 
+//	削除
 	@GetMapping("/delete/{id}")
 	public String deleteTodo(@PathVariable("id") int id) {
 		service.deleteTodo(id);
 		return "redirect:/todoList";
 	}
 
+//	追加画面へ
 	@GetMapping("/add")
 	public String addTodo(@ModelAttribute("todo") Todo todo) {
 		service.addTodo(todo);
