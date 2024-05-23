@@ -32,6 +32,9 @@ public class MyController {
 			case "deadLineTime":
 				todos = service.getAllTodosSortedByDeadLineTime();
 				break;
+			case "warning":
+				todos = service.getAllTodosSortedByWarning();
+				break;
 			default:
 				todos = service.getAllTodoList();
 				break;

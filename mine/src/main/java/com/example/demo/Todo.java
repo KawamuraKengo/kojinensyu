@@ -24,4 +24,9 @@ public class Todo {
 	private LocalTime deadLineTime;
 	private boolean everyDay=false;
 	private boolean complete=false;
+	private boolean warning=false;
+	
+	public boolean getWarnig() {
+		return this.warning;
+	}
 }

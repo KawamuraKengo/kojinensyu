@@ -59,6 +59,9 @@
                 <th>
                     <a th:href="@{/todoList(sort='deadLineTime')}">期限時間</a>
                 </th>
+				<th>
+                    <a th:href="@{/todoList(sort='warning')}">重要？</a>
+                </th>
 				<th>完了</th>
                 <th>アクション</th>
             </tr>
@@ -68,6 +71,7 @@
                 <td th:text="${todo.task}">Task</td>
                 <td th:text="${todo.deadLineDate != null ? todo.deadLineDate : todo.everyDay == True ? '毎日' : '期限なし'}">DeadLineDate</td>
                 <td th:text="${todo.deadLineTime != null ? todo.deadLineTime : '期限なし'}">DeadLineTime</td>
+				<td th:text="${todo.warning==true?'重要！！':'NO～'}">warnig</td>
 				<td>
 					<input type="checkbox" th:checked="${todo.complete}" />
 				</td>

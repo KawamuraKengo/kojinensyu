@@ -25,25 +25,43 @@ public class MyService {
 	}
 
 	public List<Todo> getAllTodosSortedByDeadLineDate() {
-		 return todoRepository.findAll().stream()
-		            .sorted((t1, t2) -> {
-		                if (t1.getDeadLineDate() == null && t2.getDeadLineDate() == null) {
-		                    return 0;
-		                }
-		                if (t1.getDeadLineDate() == null) {
-		                    return -1;
-		                }
-		                if (t2.getDeadLineDate() == null) {
-		                    return 1;
-		                }
-		                return t1.getDeadLineDate().compareTo(t2.getDeadLineDate());
-		            })
-		            .collect(Collectors.toList());
+		return todoRepository.findAll().stream()
+				.sorted((t1, t2) -> {
+					if (t1.getDeadLineDate() == null && t2.getDeadLineDate() == null) {
+						return 0;
+					}
+					if (t1.getDeadLineDate() == null) {
+						return -1;
+					}
+					if (t2.getDeadLineDate() == null) {
+						return 1;
+					}
+					return t1.getDeadLineDate().compareTo(t2.getDeadLineDate());
+				})
+				.collect(Collectors.toList());
 	}
 
 	public List<Todo> getAllTodosSortedByDeadLineTime() {
 		return todoRepository.findAll().stream()
 				.sorted((t1, t2) -> t1.getDeadLineTime().compareTo(t2.getDeadLineTime()))
+				.collect(Collectors.toList());
+	}
+
+	public List<Todo> getAllTodosSortedByWarning() {
+		return todoRepository.findAll().stream()
+				.sorted((t1, t2) -> {
+					if (t1.getWarnig() == true) {
+						if (t2.getWarnig() == true)
+							return 0;
+						else
+							return -1;
+					} else {
+						if (t2.getWarnig() == true)
+							return 1;
+						else
+							return 0;
+					}
+				})
 				.collect(Collectors.toList());
 	}
 
@@ -61,8 +79,8 @@ public class MyService {
 	}
 
 	public void addTodo(Todo todo) {
-		if(todo.getTask()!=null)
-		todoRepository.save(todo);
+		if (todo.getTask() != null)
+			todoRepository.save(todo);
 	}
 
 	public List<Todo> getTodoBylocalDate(LocalDate date) {
