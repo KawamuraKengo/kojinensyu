@@ -26,6 +26,27 @@
             display: inline-block;
         }
     </style>
+	
+<!--	<script>-->
+<!--	    function toggleComplete(checkbox, todoId) {-->
+<!--	        var url = '/toggleComplete/' + todoId;-->
+<!--	        var complete = checkbox.checked;-->
+	
+<!--	        // Ajaxリクエストを使用してcompleteフィールドを更新-->
+<!--	        var xhr = new XMLHttpRequest();-->
+<!--	        xhr.open('POST', url);-->
+<!--	        xhr.setRequestHeader('Content-Type', 'application/json');-->
+<!--	        xhr.onload = function() {-->
+<!--	            if (xhr.status === 200) {-->
+<!--	                console.log('Complete status updated successfully.');-->
+<!--	            } else {-->
+<!--	                console.error('Failed to update complete status.');-->
+<!--	            }-->
+<!--	        };-->
+<!--	        xhr.send(JSON.stringify({ complete: complete }));-->
+<!--	    }-->
+<!--	</script>-->
+
 
 </head>
 <body>
@@ -68,6 +89,7 @@
                 <td th:text="${todo.deadLineTime != null ? todo.deadLineTime : '期限なし'}">DeadLineTime</td>
 				<td>
 					<input type="checkbox" th:checked="${todo.complete}" />
+<!--					onchange="toggleComplete(this, '${todo.id}')"-->
 				</td>
                 <td>
                     <a th:href="@{/edit/{id}(id=${todo.id})}" class="btn btn-sm btn-primary">

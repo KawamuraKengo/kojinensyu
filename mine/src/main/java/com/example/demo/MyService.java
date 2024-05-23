@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class MyService {
 
@@ -27,9 +25,20 @@ public class MyService {
 	}
 
 	public List<Todo> getAllTodosSortedByDeadLineDate() {
-		return todoRepository.findAll().stream()
-				.sorted((t1, t2) -> t1.getDeadLineDate().compareTo(t2.getDeadLineDate()))
-				.collect(Collectors.toList());
+		 return todoRepository.findAll().stream()
+		            .sorted((t1, t2) -> {
+		                if (t1.getDeadLineDate() == null && t2.getDeadLineDate() == null) {
+		                    return 0;
+		                }
+		                if (t1.getDeadLineDate() == null) {
+		                    return -1;
+		                }
+		                if (t2.getDeadLineDate() == null) {
+		                    return 1;
+		                }
+		                return t1.getDeadLineDate().compareTo(t2.getDeadLineDate());
+		            })
+		            .collect(Collectors.toList());
 	}
 
 	public List<Todo> getAllTodosSortedByDeadLineTime() {
@@ -42,18 +51,15 @@ public class MyService {
 		Todo todo = todoRepository.findById(id);
 		return todo;
 	}
-	
-	@Transactional
+
 	public void editTodo(Todo todo) {
 		todoRepository.save(todo);
 	}
 
-	@Transactional
 	public void deleteTodo(int id) {
 		todoRepository.deleteById(id);
 	}
 
-	@Transactional
 	public void addTodo(Todo todo) {
 		todoRepository.save(todo);
 	}
